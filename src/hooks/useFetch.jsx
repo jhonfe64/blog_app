@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 const API_KEY = import.meta.env.API_KEY;
 
-const useFetch = (url, type, trigger, body, token) => {
+const useFetch = (url, type, body, token) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -61,7 +61,7 @@ const useFetch = (url, type, trigger, body, token) => {
 
   useEffect(() => {
     fetchData();
-  }, [trigger, url]);
+  }, [url]);
 
   return {
     data,
