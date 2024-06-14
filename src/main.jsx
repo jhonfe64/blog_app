@@ -7,7 +7,7 @@ import ArticleDetailed from "./pages/ArticleDetailed";
 import { ArticleContextProvider } from "./context/ArticlesContext";
 import Users from "./pages/Users";
 import Login from "./pages/Login";
-import ProtectRoute from "./components/ProtectRoute";
+import ProtectRoute from "./auth/ProtectRoute";
 import Error from "./pages/Error";
 import "./index.css";
 
@@ -26,16 +26,16 @@ const router = createBrowserRouter([
     element: <ArticleDetailed />,
   },
   {
+    path: "/logIn",
+    element: <Login />,
+  },
+  {
     path: "/users",
     element: (
       <ProtectRoute>
         <Users />
       </ProtectRoute>
     ),
-  },
-  {
-    path: "/logIn",
-    element: <Login />,
   },
 ]);
 

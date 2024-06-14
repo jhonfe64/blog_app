@@ -1,8 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 function LogIn() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -11,7 +14,9 @@ function LogIn() {
   } = useForm();
 
   const onSubmit = (data) => {
+    console.log(data);
     if (data.email && data.password) {
+      navigate("/users");
       localStorage.setItem("token", uuidv4());
     }
     reset();
@@ -19,6 +24,7 @@ function LogIn() {
 
   return (
     <div className="w-4/12">
+      <h1 className="text-center text-2xl mb-4 font-semibold">Ingresar</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <input
@@ -59,7 +65,7 @@ function LogIn() {
             </p>
           )}
         </div>
-        <button className="bg-[#7678ed] rounded-lg w-full p-4 mt-2  text-white font-semibold text-lg hover:bg-[#585aff] transition ease-in-out duration-300 ">
+        <button className="bg-black rounded-lg w-full p-4 mt-2  text-white font-semibold text-lg hover:bg-[#585aff] transition ease-in-out duration-300 ">
           Ingresar
         </button>
       </form>

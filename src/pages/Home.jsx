@@ -10,13 +10,14 @@ function Home() {
   const [articles, setArticles] = useState([]);
   const { articles: articlesListByTag, articleTag } =
     useContext(ArticleContext);
+  const [limitArticles, setLimitArticles] = useState(5);
+  const [limitArticlesTag, setLimitArticlesTag] = useState(5);
 
-  const { data, error, loading } = useFetch(
-    `${BASE_URL}data/v1/post?limit${20}`,
+  const { data, loading } = useFetch(
+    `${BASE_URL}data/v1/post?limit=${limitArticles}`,
     "get",
     true
   );
-
   //data principal del home
   useEffect(() => {
     if (data !== null) {
@@ -31,6 +32,10 @@ function Home() {
     }
   }, [articlesListByTag]);
 
+  const loadMoreArticles = () => {
+    setLimitArticles(limitArticles + 5);
+  };
+
   return (
     <>
       <Header />
@@ -44,14 +49,38 @@ function Home() {
             </h3>
           )}
         </div>
-
+        <button
+          onClick={() => window.location.reload()}
+          className="bg-slate-500 text-white px-4 py-2 mb-4 rounded-xl"
+        >
+          Reiniciar la busqeda
+        </button>
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
           <Masonry gutter="30px">
             {articles.map((article) => {
-              return <Card article={article} />;
+              return (
+                <Card article={article} limitArticlesTag={limitArticlesTag} />
+              );
             })}
           </Masonry>
         </ResponsiveMasonry>
+        {!articleTag ? (
+          <button
+            onClick={loadMoreArticles}
+            className="bg-red-600 block mx-auto text-white px-4 py-3 rounded-xl mt-8"
+          >
+            {loading ? "Cargando...." : "Cargar mas articulos"}
+          </button>
+        ) : (
+          <button
+            onClick={loadMoreArticles}
+            className="bg-red-600 block mx-auto text-white px-4 py-3 rounded-xl mt-8"
+          >
+            {loading
+              ? "Cargando...."
+              : `Cargar mas articulos para ${articleTag}`}
+          </button>
+        )}
       </div>
     </>
   );
