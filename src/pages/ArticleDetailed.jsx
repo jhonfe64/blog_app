@@ -12,10 +12,15 @@ function ArticleDetailed() {
     image: "",
     likes: 0,
     owner: {
-        id: "",
-        title:"",
-        
-    }
+      firstName: "",
+      id: "",
+      lastName: "",
+      picture: "",
+      title: "",
+    },
+    publishDate: "",
+    tags: [],
+    text: "",
   });
   const { id } = params;
 
@@ -33,7 +38,7 @@ function ArticleDetailed() {
 
   return (
     <div className="max-w-7xl bg-slate-100 mx-auto py-8 px-12 mt-14 rounded">
-      <Card article={article} />
+      <Card article={article} type={true} />
     </div>
   );
 }

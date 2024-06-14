@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-function Card({ article }) {
+function Card({ article, type = false }) {
   const [tagName, setTagname] = useState("");
   const [trigger, setTrigger] = useState(false);
   console.log("article", article);
@@ -40,18 +40,23 @@ function Card({ article }) {
           {article?.owner.lastName}
         </h3>
       </Link>
-      <div>
-        {article?.tags.map((tag) => {
-          return (
-            <button
-              onClick={() => handleTag(tag)}
-              className="bg-indigo-400 px-3 rounded-lg py-0.5 text-white p mr-2 text-center"
-            >
-              {tag}
-            </button>
-          );
-        })}
-      </div>
+      {type ? (
+        ""
+      ) : (
+        <div>
+          {article?.tags.map((tag) => {
+            return (
+              <button
+                onClick={() => handleTag(tag)}
+                className="bg-indigo-400 px-3 rounded-lg py-0.5 text-white p mr-2 text-center"
+              >
+                {tag}
+              </button>
+            );
+          })}
+        </div>
+      )}
+      {type && <p>{article.text}</p>}
     </div>
   );
 }
