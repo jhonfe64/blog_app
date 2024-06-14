@@ -1,6 +1,7 @@
+
 const killSession = () => {
   localStorage.removeItem("token");
-  window.location.assign("/home");
+  location.href = "/home"
 };
 
 export default killSession;
