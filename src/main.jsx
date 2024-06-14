@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import Home from "./pages/Home";
+import { ArticleContextProvider } from "./context/ArticlesContext";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -18,6 +19,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ArticleContextProvider>
+      <RouterProvider router={router} />
+    </ArticleContextProvider>
   </React.StrictMode>
 );
