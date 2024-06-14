@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-const API_KEY = import.meta.env.API_KEY;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
-const useFetch = (url, type, body, token) => {
+const useFetch = (url, type, body) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -60,7 +60,10 @@ const useFetch = (url, type, body, token) => {
   };
 
   useEffect(() => {
+    // const controller = new AbortController();
+    // const { signal } = controller;
     fetchData();
+    // return () => signal.abort;
   }, [url]);
 
   return {
