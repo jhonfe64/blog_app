@@ -1,10 +1,13 @@
 import React from "react";
-import Loggin from "../components/Loggin";
+import LogInForm from "../components/LogIn";
 
 function Users() {
   return (
     <div>
-      <Loggin />
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius laboriosam
+      commodi tempora, cum non quaerat harum molestias, est quisquam tempore
+      necessitatibus et doloribus voluptates omnis eveniet accusantium.
+      Mollitia, ipsam veritatis.
     </div>
   );
 }

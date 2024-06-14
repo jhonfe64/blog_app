@@ -6,34 +6,43 @@ import Home from "./pages/Home";
 import ArticleDetailed from "./pages/ArticleDetailed";
 import { ArticleContextProvider } from "./context/ArticlesContext";
 import Users from "./pages/Users";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import Login from "./pages/Login";
+import ProtectRoute from "./components/ProtectRoute";
+import Error from "./pages/Error";
 import "./index.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Navigate to="/home" />,
+    errorElement: <Error />,
   },
   {
     path: "/home",
     element: <Home />,
   },
   {
-    path: "article/:id",
+    path: "/article/:id",
     element: <ArticleDetailed />,
   },
   {
-    path: "users",
-    element: <Users />,
+    path: "/users",
+    element: (
+      <ProtectRoute>
+        <Users />
+      </ProtectRoute>
+    ),
+  },
+  {
+    path: "/logIn",
+    element: <Login />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId="306740953961-nn6402ad1bf57osus2j2k5k0jkk3p3s3.apps.googleusercontent.com">
-      <ArticleContextProvider>
-        <RouterProvider router={router} />
-      </ArticleContextProvider>
-    </GoogleOAuthProvider>
+    <ArticleContextProvider>
+      <RouterProvider router={router} />
+    </ArticleContextProvider>
   </React.StrictMode>
 );
